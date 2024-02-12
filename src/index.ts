@@ -1,12 +1,17 @@
 import express from 'express'
+import usersRouter from './routes/users.routes'
+import { defaultErrorHandler } from './middlewares/errors.middlewares'
+import databaseService from './services/database.services'
+
+// connect database
+databaseService.connect()
 
 const app = express()
 const port = 3000
 
 app.use(express.json())
-app.post('/', (req, res) => {
-  res.send('Hello world')
-})
+app.use('/users', usersRouter)
+app.use(defaultErrorHandler)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
