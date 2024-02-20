@@ -7,6 +7,7 @@ import {
   getProfileController,
   loginController,
   logoutController,
+  oauthController,
   refreshTokenController,
   registerController,
   resendVerifyEmailController,
@@ -51,6 +52,14 @@ usersRouter.post('/login', loginValidator, wrapRequestHandler(loginController))
  * Path: /login
  * Method: POST
  * Body: { email: string, password: string }
+ */
+
+usersRouter.get('/oauth/google', wrapRequestHandler(oauthController))
+/**
+ * Description. OAuth with Google
+ * Path: /oauth/google
+ * Method: GET
+ * Query: { code: string }
  */
 
 usersRouter.post('/logout', accessTokenValidator, refreshTokenValidator, wrapRequestHandler(logoutController))
